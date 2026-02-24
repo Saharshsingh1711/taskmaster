@@ -10,6 +10,28 @@
     --font-main: 'Inter', -apple-system, sans-serif;
 }
 
+body.dark-theme {
+    --bg-app: #121212;
+    --bg-sidebar: #1E1E1E;
+    --text-primary: #F0F0F0;
+    --text-secondary: #A0A0A0;
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-dark: rgba(255, 255, 255, 0.25);
+    --bg-tertiary: #2A2A2A;
+}
+
+body.dark-theme .input-wrapper {
+    background: #1E1E1E;
+}
+
+body.dark-theme .sidebar-item.active {
+    background: #2A2A2A;
+}
+
+body.dark-theme .nav-item.active {
+    background: #2A2A2A;
+}
+
 * {
     margin: 0;
     padding: 0;
