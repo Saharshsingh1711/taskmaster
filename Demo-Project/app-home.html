@@ -52,7 +52,8 @@
                     <p class="page-date">Tuesday, February 24</p>
                 </div>
                 <div class="header-actions">
-                    <button class="icon-btn">🔍</button>
+                    <button class="icon-btn search-btn" title="Search">🔍</button>
+                    <button class="icon-btn theme-toggle" title="Toggle Dark Mode">🌙</button>
                     <button class="icon-btn">⚙️</button>
                 </div>
             </header>
@@ -93,7 +94,7 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="app-task-item">
+                        <li class="app-task-item has-subtasks">
                             <label class="app-checkbox">
                                 <input type="checkbox">
                                 <span class="app-checkmark"></span>
@@ -103,7 +104,24 @@
                                 <div class="task-meta">
                                     <span class="tag tag-work">Work</span>
                                     <span class="due-date">Today 2:00 PM</span>
+                                    <span class="subtask-indicator">1/2 Subtasks</span>
                                 </div>
+                                <ul class="subtask-list">
+                                    <li class="subtask-item done">
+                                        <label class="app-checkbox small">
+                                            <input type="checkbox" checked>
+                                            <span class="app-checkmark"></span>
+                                        </label>
+                                        <span class="task-title">Review last week's metrics</span>
+                                    </li>
+                                    <li class="subtask-item">
+                                        <label class="app-checkbox small">
+                                            <input type="checkbox">
+                                            <span class="app-checkmark"></span>
+                                        </label>
+                                        <span class="task-title">Draft slides</span>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                     </ul>
