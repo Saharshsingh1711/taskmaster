@@ -21,15 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
     heroReveals.forEach((el, index) => {
         setTimeout(() => {
             el.classList.add('active');
-        }, index * 200 + 100);
+        }, index * 150 + 50);
     });
 
     // 3. Scroll Reveal using Intersection Observer
     const scrollReveals = document.querySelectorAll('.scroll-reveal');
 
     const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1,
+        rootMargin: "0px 0px -20px 0px"
     };
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
