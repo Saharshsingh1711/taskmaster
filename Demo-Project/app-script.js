@@ -42,28 +42,55 @@ document.addEventListener('DOMContentLoaded', () => {
     function attachCheckboxListener(checkbox) {
         checkbox.addEventListener('change', function (e) {
             const listItem = this.closest('.app-task-item');
+            const isSubtask = this.closest('.subtask-item');
 
             if (this.checked) {
                 // Determine coordinates for confetti
                 const rect = this.getBoundingClientRect();
                 fireConfetti(rect.left + rect.width / 2, rect.top + rect.height / 2);
 
-                listItem.style.animation = "slideOut 0.4s ease forwards";
-                setTimeout(() => {
-                    listItem.classList.add('done');
-                    listItem.style.animation = "";
-                    completedTasksList.prepend(listItem);
-                }, 400);
+                if (isSubtask) {
+                    isSubtask.classList.add('done');
+                } else if (listItem) {
+                    listItem.style.animation = "slideOut 0.4s ease forwards";
+                    setTimeout(() => {
+                        listItem.classList.add('done');
+                        listItem.style.animation = "";
+                        completedTasksList.prepend(listItem);
+                    }, 400);
+                }
 
             } else {
-                listItem.style.animation = "slideOut 0.4s ease forwards";
-                setTimeout(() => {
-                    listItem.classList.remove('done');
-                    listItem.style.animation = "";
-                    activeTasksList.append(listItem); // put back at bottom of active
-                }, 400);
+                if (isSubtask) {
+                    isSubtask.classList.remove('done');
+                } else if (listItem) {
+                    listItem.style.animation = "slideOut 0.4s ease forwards";
+                    setTimeout(() => {
+                        listItem.classList.remove('done');
+                        listItem.style.animation = "";
+                        activeTasksList.append(listItem);
+                    }, 400);
+                }
             }
         });
+    }
+
+    // --- Theme Toggle ---
+    const themeToggleBtn = document.querySelector('.theme-toggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
+            // Save preference to local storage
+            localStorage.setItem('superlist-theme', isDark ? 'dark' : 'light');
+        });
+
+        // Check local storage on load
+        if (localStorage.getItem('superlist-theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeToggleBtn.textContent = '☀️';
+        }
     }
 
     // --- Simple Confetti Implementation ---
