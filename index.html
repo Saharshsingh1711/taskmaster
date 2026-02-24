@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saharsh Singh | Software Engineer</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    font-family:'Inter',sans-serif;
+    background:#0b0f19;
+    color:#d1d5db;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+}
+
+/* Animated gradient glow background */
+body::before{
+    content:'';
+    position:fixed;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle,#2563eb55,transparent 70%);
+    top:-200px;
+    right:-200px;
+    z-index:-1;
+    animation:float 6s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+    from{transform:translateY(0px);}
+    to{transform:translateY(40px);}
+}
+
+.navbar{
+    background:rgba(15,23,42,0.7);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid #1e293b;
+}
+
+.nav-link{
+    color:#cbd5e1 !important;
+    transition:0.3s;
+}
+.nav-link:hover{
+    color:#3b82f6 !important;
+}
+
+.hero{
+    padding:160px 0 120px;
+}
+
+.hero h1{
+    font-size:3.2rem;
+    font-weight:700;
+    color:white;
+}
+
+.typing{
+    color:#3b82f6;
+    font-weight:600;
+}
+
+.section{
+    padding:100px 0;
+}
+
+.section-title{
+    font-size:2rem;
+    font-weight:600;
+    margin-bottom:50px;
+    color:white;
+}
+
+.card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:16px;
+    backdrop-filter:blur(15px);
+    transition:0.4s ease;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#3b82f6;
+    box-shadow:0 20px 40px rgba(59,130,246,0.2);
+}
+
+.tech-badge{
+    background:#1e293b;
+    color:#3b82f6;
+    padding:6px 12px;
+    font-size:0.8rem;
+    border-radius:20px;
+    margin-right:6px;
+}
+
+.btn-glow{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:10px 25px;
+    border-radius:30px;
+    transition:0.3s;
+}
+
+.btn-glow:hover{
+    box-shadow:0 0 20px #2563eb;
+    transform:scale(1.05);
+}
+
+footer{
+    border-top:1px solid #1e293b;
+    padding:25px;
+    text-align:center;
+}
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+<div class="container">
+<a class="navbar-brand text-white fw-bold" href="#">Saharsh Singh</a>
+<button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#nav"></button>
+<div class="collapse navbar-collapse" id="nav">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+<li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+<li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="hero container text-center">
+<h1>
+Hi, I'm Saharsh Singh <br>
+<span class="typing"></span>
+</h1>
+<p class="mt-4">
+B.Tech CSE (AI & ML) | MERN Developer | Competitive Programmer
+</p>
+<a href="Saharsh-Singh-Resume.pdf" class="btn-glow mt-3">Download Resume</a>
+</section>
+
+<!-- About -->
+<section id="about" class="section container">
+<h2 class="section-title">About Me</h2>
+<p>
+Passionate about building scalable full-stack applications and solving complex algorithmic problems.
+Experienced with MERN stack and Data Structures & Algorithms.
+Focused on writing clean, efficient and production-ready code.
+</p>
+</section>
+
+<!-- Projects -->
+<!-- Projects -->
+<section id="projects" class="section container">
+<h2 class="section-title">Projects</h2>
+
+<div class="row g-4">
+
+<!-- Reality Gap Analyzer -->
+<div class="col-md-6" data-aos="fade-up">
+<div class="card p-4">
+<h5 class="text-white">Reality Gap Analyzer</h5>
+<p class="mt-2">
+A self-analysis and productivity tracking platform that compares user goals 
+with actual progress using structured data inputs and performance metrics. 
+Designed to help users identify gaps between expectations and real outcomes.
+</p>
+<div class="mt-3">
+<span class="tech-badge">React</span>
+<span class="tech-badge">Node.js</span>
+<span class="tech-badge">Express</span>
+<span class="tech-badge">MongoDB</span>
+<span class="tech-badge">Data Visualization</span>
+</div>
+</div>
+</div>
+
+<!-- Mood Music Website -->
+<div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+<div class="card p-4">
+<h5 class="text-white">Mood Music Website</h5>
+<p class="mt-2">
+Mood-based music recommendation system built using MERN stack, 
+with REST APIs and dynamic playlist generation.
+</p>
+<div class="mt-3">
+<span class="tech-badge">React</span>
+<span class="tech-badge">Node.js</span>
+<span class="tech-badge">Express</span>
+<span class="tech-badge">MongoDB</span>
+</div>
+</div>
+</div>
+
+<!-- News Web App -->
+<div class="col-md-6" data-aos="fade-up">
+<div class="card p-4">
+<h5 class="text-white">News Web Application</h5>
+<p class="mt-2">
+Real-time news application with API integration, category filtering, 
+and responsive UI optimized for performance.
+</p>
+<div class="mt-3">
+<span class="tech-badge">JavaScript</span>
+<span class="tech-badge">REST API</span>
+<span class="tech-badge">Responsive UI</span>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+<!-- Achievements -->
+<section id="achievements" class="section container">
+<h2 class="section-title">Achievements</h2>
+
+<div class="card p-4 mb-4" data-aos="zoom-in">
+<h6 class="text-white">🏆 Winner – MIET Coding Competition (2026)</h6>
+<p>Demonstrated strong problem-solving and algorithmic skills under competitive pressure.</p>
+</div>
+
+<div class="card p-4" data-aos="zoom-in" data-aos-delay="200">
+<h6 class="text-white">🥈 Runner-Up – CodeWars (KCCITM)</h6>
+<p>Secured runner-up position in inter-college coding competition.</p>
+</div>
+
+</section>
+
+<!-- Contact -->
+<section id="contact" class="section container">
+<h2 class="section-title">Contact</h2>
+<p>Email: saharshsingh171105@gmail.com</p>
+<p>Phone: +91-9911003057</p>
+<p>Delhi, India</p>
+</section>
+
+<footer>
+© 2026 Saharsh Singh | Software Engineer
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<script>
+AOS.init({duration:900});
+
+var typed = new Typed(".typing", {
+    strings: ["Software Engineer", "MERN Stack Developer", "Competitive Programmer"],
+    typeSpeed: 60,
+    backSpeed: 40,
+    loop: true
+});
+</script>
+
+</body>
+</html>
