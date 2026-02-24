@@ -1,57 +1,85 @@
-// script.js
-// Interactive animations and functionality for the website
-
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Navbar Scroll Effect
+    const navbar = document.querySelector('.navbar');
 
-    // 1. Intersection Observer for scroll animations (mostly for Home page cards)
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.add('scrolled');
+            // Actually, let's just keep it simple, remove scrolled if top
+            navbar.classList.remove('scrolled');
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+        }
+    });
+
+    // Fire scroll event once on load to catch initial state
+    window.dispatchEvent(new Event('scroll'));
+
+    // 2. Initial Page Load Animations (Hero)
+    const heroReveals = document.querySelectorAll('.reveal');
+    heroReveals.forEach((el, index) => {
+        setTimeout(() => {
+            el.classList.add('active');
+        }, index * 200 + 100);
+    });
+
+    // 3. Scroll Reveal using Intersection Observer
+    const scrollReveals = document.querySelectorAll('.scroll-reveal');
+
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px"
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                // If it has a custom delay var (for staggered grids)
+                const delayStr = entry.target.style.getPropertyValue('--delay');
+                let timeout = 0;
+
+                if (delayStr) {
+                    timeout = parseFloat(delayStr) * 1000;
+                }
+
+                setTimeout(() => {
+                    entry.target.classList.add('active');
+                }, timeout);
+
+                // Stop observing once revealed
                 observer.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, revealOptions);
 
-    // Apply animation to elements with class 'card'
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(30px)';
-        card.style.transition = `all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) ${index * 0.15}s`;
-        observer.observe(card);
+    scrollReveals.forEach(el => {
+        revealObserver.observe(el);
     });
 
-    // 2. Real-time Analytics Bar Animation (Home Page)
-    // Find the analytics graph bars in the 'wide-card'
-    const bars = document.querySelectorAll('.wide-card div > div[style*="background: var(--accent)"]');
-    if (bars.length > 0) {
-        setInterval(() => {
-            bars.forEach(bar => {
-                const randomHeight = Math.floor(Math.random() * 60) + 30; // Between 30% and 90%
-                bar.style.height = `${randomHeight}%`;
-                bar.style.transition = 'height 0.6s ease-in-out';
-            });
-        }, 1200);
-    }
+    // 4. Interactive mockups - subtle parallax effect based on mouse movement
+    const heroMockup = document.querySelector('.hero-app-mockup');
+    const heroSection = document.querySelector('.hero-section');
 
-    // 3. Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+    if (heroMockup && heroSection) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+
+            heroMockup.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
-    });
+
+        // Reset on mouse leave
+        heroSection.addEventListener('mouseleave', () => {
+            heroMockup.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            heroMockup.style.transition = 'transform 0.5s ease';
+        });
+
+        // Remove CSS transition while moving for instant responsiveness
+        heroSection.addEventListener('mouseenter', () => {
+            heroMockup.style.transition = 'none';
+        });
+    }
 });
