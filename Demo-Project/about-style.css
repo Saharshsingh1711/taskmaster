@@ -68,7 +68,8 @@
 }
 
 .value-card {
-    background: white;
+    background: var(--bg-card);
+    /* Dark mode inner card */
     padding: 40px;
     border: 1px solid var(--border-light);
     border-radius: var(--radius-md);

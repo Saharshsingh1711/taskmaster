@@ -1,13 +1,15 @@
 :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #fdfdfd;
-    --bg-tertiary: #f4f5f6;
-    --text-primary: #111111;
-    --text-secondary: #666666;
-    --accent: #FF4D4D;
-    --accent-hover: #E63E3E;
-    --border-light: rgba(0, 0, 0, 0.08);
-    --border-dark: rgba(0, 0, 0, 0.15);
+    --bg-primary: #121316;
+    /* Deep dark blue/grey from screenshot */
+    --bg-secondary: #0d0e12;
+    --bg-tertiary: #23242a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #FF3B1D;
+    /* Stronger vibrant red/orange */
+    --accent-hover: #ff5238;
+    --border-light: rgba(255, 255, 255, 0.08);
+    --border-dark: rgba(255, 255, 255, 0.15);
 
     --font-main: 'Inter', -apple-system, sans-serif;
 
@@ -15,8 +17,8 @@
     --radius-md: 16px;
     --radius-lg: 24px;
 
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.3);
 }
 
 * {
@@ -63,7 +65,8 @@ a {
 
 .auth-box {
     width: 100%;
-    background: white;
+    background: var(--bg-primary);
+    /* Dark box */
     border: 1px solid var(--border-light);
     border-radius: var(--radius-md);
     padding: 40px;
@@ -120,8 +123,8 @@ a {
 .input-group input:focus {
     outline: none;
     border-color: var(--accent);
-    background: white;
-    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1);
+    background: var(--bg-primary);
+    box-shadow: 0 0 0 3px rgba(255, 59, 29, 0.1);
 }
 
 .form-options {
@@ -166,7 +169,7 @@ a {
 .btn-primary:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 8px 24px rgba(255, 59, 29, 0.4);
 }
 
 .auth-divider {
@@ -187,7 +190,7 @@ a {
 }
 
 .auth-divider span {
-    background: white;
+    background: var(--bg-primary);
     padding: 0 12px;
     color: var(--text-secondary);
     font-size: 0.85rem;
@@ -196,7 +199,7 @@ a {
 }
 
 .btn-outline {
-    background: white;
+    background: var(--bg-primary);
     border: 1px solid var(--border-light);
     color: var(--text-primary);
 }

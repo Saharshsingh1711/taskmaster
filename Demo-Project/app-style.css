@@ -1,34 +1,27 @@
 :root {
-    --bg-app: #fcfcfc;
-    --bg-sidebar: #f5f5f5;
-    --text-primary: #111111;
-    --text-secondary: #666666;
-    --accent: #FF4D4D;
-    --border-light: rgba(0, 0, 0, 0.08);
-    --border-dark: rgba(0, 0, 0, 0.15);
+    --bg-app: #121212;
+    /* Deep dark background */
+    --bg-sidebar: #18191e;
+    --text-primary: #F0F0F0;
+    --text-secondary: #A0A0A0;
+    --accent: #FF3B1D;
+    /* Stronger vibrant red/orange */
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-dark: rgba(255, 255, 255, 0.25);
+    --bg-tertiary: #2A2A2A;
 
     --font-main: 'Inter', -apple-system, sans-serif;
 }
 
-body.dark-theme {
-    --bg-app: #121212;
-    --bg-sidebar: #1E1E1E;
-    --text-primary: #F0F0F0;
-    --text-secondary: #A0A0A0;
-    --border-light: rgba(255, 255, 255, 0.1);
-    --border-dark: rgba(255, 255, 255, 0.25);
-    --bg-tertiary: #2A2A2A;
+.input-wrapper {
+    background: #18191e;
 }
 
-body.dark-theme .input-wrapper {
-    background: #1E1E1E;
-}
-
-body.dark-theme .sidebar-item.active {
+.sidebar-item.active {
     background: #2A2A2A;
 }
 
-body.dark-theme .nav-item.active {
+.nav-item.active {
     background: #2A2A2A;
 }
 
@@ -187,9 +180,9 @@ button {
 }
 
 .nav-item.active {
-    background: white;
+    background: var(--bg-tertiary);
     color: var(--accent);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    box-shadow: none;
 }
 
 .icon {
@@ -288,16 +281,16 @@ button {
     align-items: center;
     gap: 16px;
     padding: 16px;
-    background: white;
+    background: var(--bg-sidebar);
     border: 1px solid var(--border-light);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 .input-wrapper:focus-within {
     border-color: var(--accent);
-    box-shadow: 0 4px 12px rgba(255, 77, 77, 0.1);
+    box-shadow: 0 4px 12px rgba(255, 59, 29, 0.2);
 }
 
 .plus-icon {
@@ -313,6 +306,7 @@ button {
     font-size: 1.05rem;
     font-family: inherit;
     color: var(--text-primary);
+    background: transparent;
 }
 
 .task-input::placeholder {
@@ -430,13 +424,13 @@ button {
 }
 
 .tag-work {
-    background: rgba(59, 130, 246, 0.1);
-    color: #3B82F6;
+    background: rgba(59, 130, 246, 0.2);
+    color: #60A5FA;
 }
 
 .tag-personal {
-    background: rgba(245, 158, 11, 0.1);
-    color: #F59E0B;
+    background: rgba(245, 158, 11, 0.2);
+    color: #FBBF24;
 }
 
 .due-date {
