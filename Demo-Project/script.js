@@ -82,4 +82,25 @@ document.addEventListener('DOMContentLoaded', () => {
             heroMockup.style.transition = 'none';
         });
     }
+
+    // 5. Page Transitions
+    const links = document.querySelectorAll('a[href]');
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            const target = link.getAttribute('href');
+
+            // Ignore anchors, external links, or empty links
+            if (target.startsWith('#') || target.startsWith('http') || target === '') {
+                return;
+            }
+
+            e.preventDefault();
+            document.body.classList.add('page-transitioning');
+
+            setTimeout(() => {
+                window.location.href = target;
+            }, 400); // Matches the 0.4s fade-out animation in CSS
+        });
+    });
 });

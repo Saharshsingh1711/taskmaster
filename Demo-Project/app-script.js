@@ -11,6 +11,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let particles = [];
 
+    // Load tasks from Local Storage
+    function loadTasks() {
+        const savedTasks = localStorage.getItem('taskmaster-tasks');
+        if (savedTasks) {
+            const data = JSON.parse(savedTasks);
+            activeTasksList.innerHTML = data.active || '';
+            completedTasksList.innerHTML = data.completed || '';
+
+            // Re-attach listeners to loaded items
+            document.querySelectorAll('.app-checkbox input').forEach(checkbox => attachCheckboxListener(checkbox));
+            document.querySelectorAll('.app-task-item').forEach(item => attachDragEvents(item));
+        } else {
+            // Initial binding if no local storage
+            document.querySelectorAll('.app-checkbox input').forEach(checkbox => attachCheckboxListener(checkbox));
+            document.querySelectorAll('.app-task-item').forEach(item => attachDragEvents(item));
+        }
+    }
+
+    function saveTasks() {
+        const data = {
+            active: activeTasksList.innerHTML,
+            completed: completedTasksList.innerHTML
+        };
+        localStorage.setItem('taskmaster-tasks', JSON.stringify(data));
+    }
+
+    // Call load on init
+    loadTasks();
+
     // Handle Add new Task
     taskInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && taskInput.value.trim() !== '') {
@@ -33,18 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
             activeTasksList.prepend(li);
             attachCheckboxListener(li.querySelector('input[type="checkbox"]'));
             attachDragEvents(li);
+            saveTasks();
         }
     });
 
-    // Attach listener to existing checkboxes and drag events
-    document.querySelectorAll('.app-checkbox input').forEach(checkbox => {
-        attachCheckboxListener(checkbox);
-    });
-
-    document.querySelectorAll('.app-task-item').forEach(item => {
-        item.setAttribute('draggable', 'true');
-        attachDragEvents(item);
-    });
+    // We no longer need the initial binding loop here because loadTasks handles it.
 
     function attachCheckboxListener(checkbox) {
         checkbox.addEventListener('change', function (e) {
@@ -137,11 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isDark = document.body.classList.contains('dark-theme');
             themeToggleBtn.textContent = isDark ? '☀️' : '🌙';
             // Save preference to local storage
-            localStorage.setItem('superlist-theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('taskmaster-theme', isDark ? 'dark' : 'light');
         });
 
         // Check local storage on load
-        if (localStorage.getItem('superlist-theme') === 'dark') {
+        if (localStorage.getItem('taskmaster-theme') === 'dark') {
             document.body.classList.add('dark-theme');
             themeToggleBtn.textContent = '☀️';
         }
@@ -200,5 +222,26 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+    });
+
+    // --- Page Transitions ---
+    const links = document.querySelectorAll('a[href]');
+
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            const target = link.getAttribute('href');
+
+            // Ignore anchors, empty links, or js redirects
+            if (target.startsWith('#') || target.startsWith('http') || target === '') {
+                return;
+            }
+
+            e.preventDefault();
+            document.body.classList.add('page-transitioning');
+
+            setTimeout(() => {
+                window.location.href = target;
+            }, 400); // Matches the 0.4s fade-out animation in CSS
+        });
     });
 });
