@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const li = document.createElement('li');
             li.className = 'app-task-item';
+            li.setAttribute('draggable', 'true');
             li.innerHTML = `
                 <label class="app-checkbox">
                     <input type="checkbox">
@@ -31,12 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             activeTasksList.prepend(li);
             attachCheckboxListener(li.querySelector('input[type="checkbox"]'));
+            attachDragEvents(li);
         }
     });
 
-    // Attach listener to existing checkboxes
+    // Attach listener to existing checkboxes and drag events
     document.querySelectorAll('.app-checkbox input').forEach(checkbox => {
         attachCheckboxListener(checkbox);
+    });
+
+    document.querySelectorAll('.app-task-item').forEach(item => {
+        item.setAttribute('draggable', 'true');
+        attachDragEvents(item);
     });
 
     function attachCheckboxListener(checkbox) {
@@ -73,6 +80,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    }
+
+    // --- Drag and Drop Logic ---
+    function attachDragEvents(item) {
+        item.addEventListener('dragstart', () => {
+            item.classList.add('dragging');
+        });
+
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+        });
+    }
+
+    const sortableLists = document.querySelectorAll('.app-task-list');
+
+    sortableLists.forEach(list => {
+        list.addEventListener('dragover', e => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(list, e.clientY);
+            const draggable = document.querySelector('.dragging');
+            if (!draggable) return;
+
+            if (afterElement == null) {
+                list.appendChild(draggable);
+            } else {
+                list.insertBefore(draggable, afterElement);
+            }
+        });
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.app-task-item:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
 
     // --- Theme Toggle ---
