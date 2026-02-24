@@ -58,24 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (isSubtask) {
                     isSubtask.classList.add('done');
+                    saveTasks();
                 } else if (listItem) {
                     listItem.style.animation = "slideOut 0.4s ease forwards";
                     setTimeout(() => {
                         listItem.classList.add('done');
                         listItem.style.animation = "";
                         completedTasksList.prepend(listItem);
+                        saveTasks();
                     }, 400);
                 }
 
             } else {
                 if (isSubtask) {
                     isSubtask.classList.remove('done');
+                    saveTasks();
                 } else if (listItem) {
                     listItem.style.animation = "slideOut 0.4s ease forwards";
                     setTimeout(() => {
                         listItem.classList.remove('done');
                         listItem.style.animation = "";
                         activeTasksList.append(listItem);
+                        saveTasks();
                     }, 400);
                 }
             }
@@ -90,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         item.addEventListener('dragend', () => {
             item.classList.remove('dragging');
+            saveTasks(); // Save after reordering
         });
     }
 
